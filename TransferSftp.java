@@ -2,7 +2,6 @@ package digital.ctm;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -34,33 +33,6 @@ public class TransferSftp
         frame.setVisible(true);
     }
 
-    public static void showMenssageWorkFinished(){
-        JFrame frame = new JFrame("Simple GUI");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JLabel txtLabel = new JLabel("Transferencia terminada. Ya puede apagar el equipo", SwingConstants.CENTER);
-        txtLabel.setPreferredSize(new Dimension(500, 200));
-        frame.getContentPane().add(txtLabel, BorderLayout.CENTER);
-
-        //Display the window.
-        frame.setLocationRelativeTo(null);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void showMenssageShutdownpc(){
-        JFrame frame = new JFrame("Simple GUI");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JLabel txtLabel = new JLabel("El equipo se apagará", SwingConstants.CENTER);
-        txtLabel.setPreferredSize(new Dimension(500, 200));
-        frame.getContentPane().add(txtLabel, BorderLayout.CENTER);
-
-        //Display the window.
-        frame.setLocationRelativeTo(null);
-        frame.pack();
-        frame.setVisible(true);
-    }
 /*
     public static void shutdownPc() {
         Runtime runtime = Runtime.getRuntime();
@@ -91,13 +63,13 @@ public class TransferSftp
         if (files != null) {
             for(File file : files){
                 if (file.isDirectory()) {
-                    String newDestination = remoteDirectory + "/" + file.getName();
+                    String newDestination = remoteDirectory  + "/" + file.getName();
                     uploadDirectory(channelSftp, file.getAbsolutePath(), newDestination);
                     System.out.println("Upload directory:" + file.getName());
                 }else{
 
                     try {
-                        channelSftp.put(file.getAbsolutePath(), remoteDirectory + "/" + file.getName() + "-" + file.lastModified());                    
+                        channelSftp.put(file.getAbsolutePath(), remoteDirectory + "/" + file.getName());
                     } catch (SftpException e) {
                         System.out.println("Error in the file " + file.getName());
                         System.out.println(e.getMessage());
@@ -110,28 +82,7 @@ public class TransferSftp
 
       }
 
-    public static void delete(String localDirectory){
-        File localDir = new File(localDirectory);
-
-        if (!localDir.exists()) {
-            System.out.println("Directory does not exist: " + localDirectory);
-            return;
-        }
-             
-           File[] listFiles = localDir.listFiles();
-           if(listFiles != null){
-           for (File file : listFiles) {
-                if (file.isDirectory()) {
-                    delete(file.getAbsolutePath());
-                }else{
-                    file.delete();
-                    System.out.println("Files delete sussesfull");
-                }
-           }
-        }
-    }
-
-
+  
 
     public static void main( String[] args ) throws IOException
     {
@@ -157,11 +108,7 @@ public class TransferSftp
              showMenssage();
             uploadDirectory(channelSftp, localDir, remoteDir);
                System.out.println("Transfer complet");
-            delete(localDir);
             
-             showMenssageWorkFinished();
-             showMenssageShutdownpc();
-           //  shutdownPc();
             channel.disconnect();
         } catch (JSchException | SftpException | FileNotFoundException e) {
            e.printStackTrace();                                   
