@@ -47,13 +47,7 @@ public class FileDeleter {
        }
 
     }
-
-    public static void createNewFolder(String dir){
-                File directory = new File(dir);
-                directory.mkdir();
-                
-    }
-
+//this is the branch 2
     public static void main(String[] args) {
         String dir = "C:\\Users\\Windows11\\Desktop\\Respaldos";
         deleteFiles(dir);
