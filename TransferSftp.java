@@ -97,7 +97,7 @@ public class TransferSftp
                 }else{
 
                     try {
-                        channelSftp.put(file.getAbsolutePath(), remoteDirectory + "/" + file.getName());                    
+                        channelSftp.put(file.getAbsolutePath(), remoteDirectory + "/" + file.getName() + "-" + file.lastModified());                    
                     } catch (SftpException e) {
                         System.out.println("Error in the file " + file.getName());
                         System.out.println(e.getMessage());
@@ -131,14 +131,7 @@ public class TransferSftp
         }
     }
 
-    public static void writeToFile(String file){
-        try{
-            FileWriter myWriter  = new FileWriter(file);
-            myWriter.write("The last modified " + );
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
+
 
     public static void main( String[] args ) throws IOException
     {
@@ -147,7 +140,6 @@ public class TransferSftp
         String UserName = "DATA CENTER";
         String password = "Afiliados";
         String localDir = "C:\\Users\\Windows11\\Desktop\\Respaldos";
-        String localDir2 = "C:\\Users\\Windows11\\Desktop";
 
         String remoteDir = "remote";
         JSch jsch = new JSch();
