@@ -86,13 +86,13 @@ public class TransferSftp
 
     public static void main( String[] args ) throws IOException
     {
-        int port = 22;
-        String ip = "192.168.100.44";
-        String UserName = "DATA CENTER";
-        String password = "Afiliados";
-        String localDir = "C:\\Users\\Windows11\\Desktop\\Respaldos";
+        int port = "the_port_sftp";
+        String ip = "you_ip_or_hostname";
+        String UserName = "to_you_username";
+        String password = "to_you_password";
+        String localDir = "usser_path/dir/folder";
 
-        String remoteDir = "remote";
+        String remoteDir = "you_dir_remote_in_usser";
         JSch jsch = new JSch();
         Session session = null;
         ChannelSftp channelSftp = null;
